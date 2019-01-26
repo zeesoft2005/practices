@@ -1,0 +1,45 @@
+<h2>{{title}}</h2>
+<!-- <select>
+ <button *ngFor="let button of buttons">{{button}}</option>
+</select> -->
+<br/>
+<br>
+<table border='1'>
+  <thead>
+    <tr>
+      <th colspan="4"><input type="text" disabled="disabled" placeholder="0" value="{{text}}"/></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2"><button style="width: 190px;" (click)="Clear()">C</button></td>
+      <td colspan="2"><button style="width: 190px;"  (click)="CE()">CE</button></td>
+      <!-- <td><button (click)="btnClicked($event)">9</button></td> -->
+      <!-- <td><button (click)="btnClicked($event)">*</button></td> -->
+    </tr>
+      <tr>
+        <td><button (click)="btnClicked($event)">7</button></td>
+        <td><button (click)="btnClicked($event)">8</button></td>
+        <td><button (click)="btnClicked($event)">9</button></td>
+        <td><button (click)="btnClicked($event)">*</button></td>
+      </tr>
+      <tr>
+        <td><button (click)="btnClicked($event)">4</button></td>
+        <td><button (click)="btnClicked($event)">5</button></td>
+        <td><button (click)="btnClicked($event)">6</button></td>
+        <td><button (click)="btnClicked($event)">/</button></td>
+      </tr>
+      <tr>
+        <td><button (click)="btnClicked($event)">1</button></td>
+        <td><button (click)="btnClicked($event)">2</button></td>
+        <td><button (click)="btnClicked($event)">3</button></td>
+        <td><button (click)="btnClicked($event)">-</button></td>
+      </tr>
+      <tr>
+        <td><button (click)="btnClicked($event)">.</button></td>
+        <td><button (click)="btnClicked($event)">0</button></td>
+        <td><button (click)="Evalute()">=</button></td>
+        <td><button (click)="btnClicked($event)">+</button></td>
+      </tr>
+  </tbody>
+</table>
