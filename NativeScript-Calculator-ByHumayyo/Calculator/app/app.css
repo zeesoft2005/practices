@@ -1,0 +1,23 @@
+@import '~nativescript-theme-core/css/forest.css';
+.btn {
+    font-size: 40;
+    margin: 1px;
+}
+.container
+{
+    margin: 0;
+}
+.page{
+    font-family: Covergence;
+}
+.h1
+{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: white;
+}
+.input{
+    font-size: 25px;
+    padding: 5px;
+    text-align: right;
+}
