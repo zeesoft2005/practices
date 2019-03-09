@@ -1,0 +1,17 @@
+<ActionBar title="Register">
+        <NavigationButton text="Back" ios.position="left"></NavigationButton>
+</ActionBar>
+<GridLayout backgroundColor="#cccccc">
+<ScrollView>
+    <StackLayout margin="10" verticalAlignment="middle">
+        <StackLayout class="form p-15" backgroundColor="#fff">
+            <TextField class="input input-border m-b-10" [(ngModel)]="user.Name" hint="User Name"></TextField>
+            <TextField class="input input-border m-b-10" [(ngModel)]="user.Email" hint="Email Address" keyboardType="email"></TextField>
+            <TextField class="input input-border m-b-10" [(ngModel)]="user.Password" hint="Password" secure="true"></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+            <Button class="btn btn-primary w-full" text="Register" (tap)="Register()"></Button>
+            <Label class="text-center footnote" (tap)="goBack()" text="Already a member? Login here."></Label>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
+</GridLayout>

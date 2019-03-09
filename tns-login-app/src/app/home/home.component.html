@@ -1,0 +1,12 @@
+<ActionBar title="Secure Page">
+        <ActionItem text="Logout" ios.position="true" (tap)="logout()"></ActionItem>
+    </ActionBar>
+    <GridLayout class="home-panel">
+        <Label class="h1 text-center">My Profile: </Label> 
+        <StackLayout class="form">
+            <Label class="h3" text="Id: "></Label><Label text="{{currentUser.Id}}"></Label>
+            <Label class="h3" text="Name: "></Label><Label text="{{currentUser.Name}}"></Label>
+            <Label class="h3" text="Email: "></Label><Label text="{{currentUser.Email}}"></Label>
+            <Label class="h3" text="Password: "></Label><Label text="{{currentUser.Password}}"></Label>
+        </StackLayout>
+    </GridLayout>

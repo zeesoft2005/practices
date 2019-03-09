@@ -1,0 +1,14 @@
+<ActionBar title="Login"></ActionBar>
+<GridLayout backgroundColor="#cccccc">
+<ScrollView>
+    <StackLayout margin="10" verticalAlignment="middle">
+        <StackLayout class="form p-15" backgroundColor="#fff">
+            <TextField [(ngModel)]="user.Email" class="input input-border m-b-10" hint="Email Address" keyboardType="email"></TextField>
+            <TextField [(ngModel)]="user.Password" class="input input-border m-b-10" hint="Password" secure="true"></TextField>
+
+            <Button class="btn btn-primary w-full" text="Login" (tap)="Login()"></Button>
+            <Label class="text-center footnote" [nsRouterLink]="['/register']" text="Register here."></Label>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
+</GridLayout>

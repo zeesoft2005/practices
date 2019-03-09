@@ -1,0 +1,25 @@
+<Page class="page">
+<ActionBar title="Admin Page">
+    <ActionItem text="Logout" ios.position="true" (tap)="logout()"></ActionItem>
+    
+</ActionBar>
+<GridLayout class="home-panel">
+
+    <StackLayout class="">
+    <Label style="font-size: 50;" class="h1" text="Welcome Admin!"></Label>
+    <Button class="btn btn-primary" text="List Of Users" (tap)="showUsers()"></Button>
+</StackLayout>
+    <!-- <Button class="btn btn-default" text="List Of Users"></Button>
+    <Button class="btn btn-outline" text="List Of Users"></Button> -->
+
+    <!-- <ListView [items]="users" (loaded)="console.log('Item(s) Loaded Successfuly');" (itemTap)="onItemTap(event)" class="list-group">
+        <ng-template let-user="item">
+          <StackLayout class="list-group-item">
+            <Label text="User Name: "></Label>
+            <Label [text]="user.Name" class="list-group-item"></Label>
+          </StackLayout>
+        </ng-template>
+    </ListView> -->
+</GridLayout>
+</Page>
+

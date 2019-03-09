@@ -1,0 +1,19 @@
+<page class="page">
+    <ActionBar class="action-bar">
+        <ActionItem android.systemIcon="ic_menu_back" ios.systemIcon="8" (tap)="goBack()" ios.position="left" android.position="actionbar"></ActionItem>
+    </ActionBar>
+    <StackLayout class="home-panel" height="100%">
+        <label class="h1 text-center" text="All Users"></label>
+        <StackLayout class="hr-light"></StackLayout>
+    <ScrollView height="100%">
+            <ListView [items]="users" (longPress)="onLongTap($event)" class="list-group">
+                <ng-template let-user="item" let-i="index" let-odd="odd" let-even="even">
+                    <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                    <StackLayout orientation="horizontal" class="list-group-item">
+                        <Label [text]="user.Name"></Label>
+                    </StackLayout>
+                </ng-template>
+            </ListView>
+    </ScrollView>
+    </StackLayout>
+</page>
