@@ -1,12 +1,14 @@
 var TS;
-(function (TS) {
+(function (TS   ) {
     var Basics;
-    (function (Basics) {
+    (function (Basics       )       {
         //==== type system =====//
         //declare a variable of type 'any' implicitley
-        var a;
+        var a   ;
         a = 1;
         a = 's';
+        bb=1;
+        
         //declare a variable of type 'any' explicitley
         var b;
         b = true;

@@ -1,5 +1,36 @@
 
 //==== type system =====//
+//difference b/w let and var
+var fV = 4;//function scoped
+if (true) {
+  fV = 5;
+}
+console.log(fV);//prints 5
+let bV = 5;//block-scoped
+if (true) {
+  let bV = 4;
+}
+console.log(bV);//prints 4
+//1. let is good to use in a loop to avoid side-effect of closure:
+var funcs = [];
+// create a bunch of functions
+for (let i = 0; i < 3; i++) { // Note the use of let vs var if 'let i' is replaced with 'var i' 
+    funcs.push(function() {
+        console.log(i);
+    })
+}
+// call them
+for (var j = 0; j < 3; j++) {
+    funcs[j]();
+}
+let bar;//it's ok
+//like, let, const is block scoped
+//const foo; // ERROR: const declarations must be initialized
+const foo = 123;
+//foo = 456; // ERROR: Left-hand side of an assignment expression cannot be a constant
+const foo = { bar: 123 };//but we can assign new value to an obj prop
+foo.bar = 456; // Allowed!
+console.log(foo); // { bar: 456 }
 //declare a variable of type 'any' implicitley
 let a;
 a = 1;
