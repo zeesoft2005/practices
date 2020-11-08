@@ -64,9 +64,9 @@ function iTakeItAll(first, second, ...allOthers) {
 iTakeItAll('foo', 'bar'); // []
 iTakeItAll('foo', 'bar', 'bas', 'qux'); // ['bas','qux']
 
-function foo(x, y, z) { }
-var args = [0, 1, 2];
-foo(...args);//Here we are spreading the args array into positional arguments.
+function fu(x, y, z) { }
+let args:[number, number, number] = [0, 1, 2];
+fu(...args);//Here we are spreading the args array into positional arguments.
 
 
 //===CONCEPTS: ARROW FUNCTIONS
@@ -101,13 +101,34 @@ class Person2 {
     }
 }
 
-
 //===CONCEPTS: for...of VERSUS for...in
 var someArray = [9, 2, 5];
 for (var item in someArray) {
     console.log(item); // 0,1,2
 }
 var someArray = [9, 2, 5];
-for (var item of someArray) {
-    console.log(item); // 9,2,5
+for (var el of someArray) {
+    console.log(el); // 9,2,5
 }
+
+//===CONCEPTS: Template Strings: use of backticks ( i.e. ` ) instead of single (') or double (") quotes
+
+var lyrics = 'Never gonna give you up';
+var html = `<div>${lyrics}</div>`;//interpolation
+//multiline strings
+ lyrics = `Never gonna give you up
+Never gonna let you down`;
+console.log(`1 and 1 make ${1 + 1}`);//aanything inside the interpolation (${ and }) can be a js expression 
+console.log(html);
+//tagged template
+let nameStr = 'Zee';
+function sayHello(text: TemplateStringsArray, name: string) {
+    return name? 'Hi, '+ name : 'Hi';
+}
+//ref. https://www.tektutorialshub.com/typescript/typescript-tagged-templates/
+var templateWithTag = sayHello `${nameStr} world`;
+var templateWithoutTag = `${nameStr} world`;
+//var templateWithoutPlaceholder = sayHello` world`;//error: must have 2nd arg: a string placeholder
+
+console.log(templateWithTag);
+console.log(templateWithoutTag);
