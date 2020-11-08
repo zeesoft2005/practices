@@ -26,11 +26,11 @@ for (var j = 0; j < 3; j++) {
 let bar;//it's ok
 //like, let, const is block scoped
 //const foo; // ERROR: const declarations must be initialized
-const foo = 123;
-//foo = 456; // ERROR: Left-hand side of an assignment expression cannot be a constant
-const foo = { bar: 123 };//but we can assign new value to an obj prop
-foo.bar = 456; // Allowed!
-console.log(foo); // { bar: 456 }
+const fooo1 = 123;
+//fooo1 = 456; // ERROR: Left-hand side of an assignment expression cannot be a constant
+const fooo = { bar: 123 };//but we can assign new value to an obj prop
+fooo.bar = 456; // Allowed!
+console.log(fooo); // { bar: 456 }
 //declare a variable of type 'any' implicitley
 let a;
 a = 1;
@@ -125,5 +125,5 @@ interface UIElement extends DomElement{
   value: string;
 }
 // a type composed of a class+interface
-let el: UIElement = {id: '1', name: 'P', value: ' a paraghraph...'};
+let ele: UIElement = {id: '1', name: 'P', value: ' a paraghraph...'};
 

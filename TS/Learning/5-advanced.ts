@@ -89,14 +89,14 @@ function Person(age) {
         this.age++;
     }
 }
-var person = new Person(1);
+const person = new Person(1);
 setTimeout(person.growOld,1000);//prints 1 which should be 2
 setTimeout(person.growOlder, 1000);//prints 2
 setTimeout(function () { console.log(person.age); }, 2000); // 1, should have been 2
 //TS version
 class Person2 {
     constructor(public age:number) {}
-    growOld = () => {
+    growOld = () =>{
         this.age++;
     }
 }
@@ -107,8 +107,8 @@ for (var item in someArray) {
     console.log(item); // 0,1,2
 }
 var someArray = [9, 2, 5];
-for (var el of someArray) {
-    console.log(el); // 9,2,5
+for (var elem of someArray) {
+    console.log(elem); // 9,2,5
 }
 
 //===CONCEPTS: Template Strings: use of backticks ( i.e. ` ) instead of single (') or double (") quotes
@@ -136,7 +136,7 @@ var templateWithoutTag = `${nameStr} world`;
 
 console.log(templateWithTag);
 console.log(templateWithoutTag);
-const greet = (name) => `hello ${name}`
+const greet = (name: string) => `hello ${name}`
 console.log(greet('Zeeshan')); // hello timothee
 
 //raw and rest
@@ -154,3 +154,26 @@ function say(strings: TemplateStringsArray, ... expr: string[]) {
 }
  
 console.log(say`Welcome, ${firstName} ${lastName}. Learn ${topic} here`);
+
+
+//===CONCEPTS: Promise: 
+//1. 
+//2. 
+// References: 
+function asyncAction() {
+  var promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("Async is done!");
+      reject('Rejected!');
+    }, 1500);
+  });
+  return promise;
+}
+
+asyncAction().then(function(success) { 
+    console.log(success); 
+}) 
+.catch(function(error) { 
+   // error handler is called
+   console.log(error); 
+});

@@ -1,6 +1,6 @@
-///<reference path="Basics/2-generics.ts"/>
-///<reference path="Basics/3-OOP.ts"/>
-import IShape from "./Basics/4-modules"
+///<reference path="Learning/2-generics.ts"/>
+///<reference path="Learning/3-OOP.ts"/>
+import IShape from "./Learning/4-modules"
 
 //==== OOP: class types =====//
 /*
