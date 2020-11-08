@@ -21,9 +21,11 @@ YBR.startRunning(); // CD70 is running
 */
 
 let circle: IShape;
-circle = {draw:               function(){
+circle = {
+    draw: function () {
 
-    console.log("drawing a circle'); 
+        console.log("drawing a circle"); 
     
-}}
+}
+};
 circle.draw();

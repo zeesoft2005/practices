@@ -112,7 +112,11 @@ for (var el of someArray) {
 }
 
 //===CONCEPTS: Template Strings: use of backticks ( i.e. ` ) instead of single (') or double (") quotes
-
+//1. a template engine for free.
+//2. interpolation (aka dynamic values)
+// References: 
+// https://www.tektutorialshub.com/typescript/typescript-tagged-templates/
+// https://dev.to/tclain/ests-bit-of-the-day-typed-tagged-templates-pj8
 var lyrics = 'Never gonna give you up';
 var html = `<div>${lyrics}</div>`;//interpolation
 //multiline strings
@@ -132,3 +136,21 @@ var templateWithoutTag = `${nameStr} world`;
 
 console.log(templateWithTag);
 console.log(templateWithoutTag);
+const greet = (name) => `hello ${name}`
+console.log(greet('Zeeshan')); // hello timothee
+
+//raw and rest
+let firstName: string = "Sachin"
+let lastName: string = "Tendulkar"
+let topic = "Typescript"
+ 
+function say(strings: TemplateStringsArray, ... expr: string[]) {
+    let str = '';
+    console.log(strings.raw);//this gives us raw template strings w/o placeholders
+  strings.forEach((string, i) => {
+      str += string + (expr[i] || '');
+  });
+  return str;
+}
+ 
+console.log(say`Welcome, ${firstName} ${lastName}. Learn ${topic} here`);
