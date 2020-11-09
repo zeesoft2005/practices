@@ -321,8 +321,10 @@ Promise.all([loadItem(1), loadItem(2)])
 //===CONCEPTS: async/await: 
 //1. a mechanism of making task-based asynchronous method
 //2. Using async await lets us use Promises in a reliable and safe way.
+//3. async/await allows you to write asynchronous code based on Promises, in a manner that allows you to reuse your synchronous code writing skills.
+//https://blog.bitsrc.io/keep-your-promises-in-typescript-using-async-await-7bdc57041308
 
-//async functions
+//async functions: An async function always returns a Promise
 async function gilad() {
   return 'Gilad';
 }
@@ -349,12 +351,12 @@ const logIt = async (text:string) => {
     console.log(text);
 };
 const wait = (ms) => new Promise(res => setTimeout(res, ms));
-const startAsync = async callback => {
+const startAsync = async cb => {
   await wait(1000);
-  callback('Hello');
+  cb('Hello');
   await wait(1000);
-  callback('And Welcome');
+  cb('And Welcome');
   await wait(1000);
-  callback('To Async Await Using TypeScript');
+  cb('To Async Await Using TypeScript');
 };
 startAsync(logIt);
