@@ -157,23 +157,204 @@ console.log(say`Welcome, ${firstName} ${lastName}. Learn ${topic} here`);
 
 
 //===CONCEPTS: Promise: 
-//1. 
-//2. 
+//1. The promise is an executable task which runs .then (if resolved) or .catch (if rejected).
+//2. Promises can be run sequentially and inparallel 
 // References: 
+import {Promise} from 'es6-promise' //https://stackoverflow.com/questions/43119163/typescript-error-ts2693-promise-only-refers-to-a-type-but-is-being-used-as
+
+const promise = new Promise((resolve, reject) => {
+    reject(new Error("Something awful happened"));
+});
+promise.then((res) => {
+    // This is never called
+});
+promise.catch((err) => {
+    console.log('I get called:', err.message); // I get called: 'Something awful happened'
+});
+
 function asyncAction() {
   var promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log("Async is done!");
-      reject('Rejected!');
+      //sreject('Rejected!');
+    }, 1500);
+      setTimeout(() => {
+      resolve('Resolved!');
     }, 1500);
   });
   return promise;
 }
-
 asyncAction().then(function(success) { 
-    console.log(success); 
+    console.log('success:then: ' + success); 
+    
 }) 
 .catch(function(error) { 
    // error handler is called
-   console.log(error); 
+   console.log('catch: '+ error); 
 });
+//The chain-ability of promises is the heart of the benefit that promises provide. 
+//then chaining, best practice is to pass error handler at the end; i.e. last then
+//You can aggregate the error handling of any preceding portion of the chain with a single catch:
+// Create a rejected promise
+Promise.reject(new Error('something bad happened'))
+    .then((res) => {
+        console.log(res); // not called
+        return 456;
+    })
+    .then((res) => {
+        console.log(res); // not called
+        return 123;
+    })
+    .then((res) => {
+        console.log(res); // not called
+        return 123;
+    })
+    .catch((err) => {
+        console.log(err.message); // something bad happened
+    });
+
+Promise.reject("errorMessage")
+    .then(
+        (value) => {
+            console.log('lambda:then: ' + value); 
+        },
+        (error) => {
+            console.log('lambda:error ' + error); 
+            return error;
+        }
+    ).then(
+        (value) => console.log('success:'+value),
+        (error) => console.error('error:'+error)
+);
+  
+//static methods: Promise.resolve and Promise.reject:
+Promise.resolve(123)
+    .then((res) => {
+        console.log(res); // 123
+        return 456;
+    })
+    .then((res) => {
+        console.log(res); // 456
+        return Promise.resolve(123); // Notice that we are returning a Promise
+    })
+    .then((res) => {
+        console.log(res); // 123 : Notice that this `then` is called with the resolved value
+        return 123;
+    });
+
+    //The catch actually returns a new promise (effectively creating a new promise chain):
+    // Create a rejected promise
+Promise.reject(new Error('something bad happened'))
+    .then((res) => {
+        console.log(res); // not called
+        return 456;
+    })
+    .catch((err) => {
+        console.log(err.message); // something bad happened
+        return 123;
+    })
+    .then((res) => {
+        console.log(res); // 123
+    });
+
+// A Program to generate Even/Odd number based on a generic Promise
+const getRandomInt = (): string => {
+    return ( Math.random() * 10 ).toFixed( 0 );
+};
+
+// resolve with an `even` integer
+const findEven = new Promise<number>( ( resolve, reject ) => {
+    setTimeout( function(): void {
+
+        // convert `string` to `number`
+        const value = parseInt( getRandomInt() );
+
+        if( value % 2 === 0 ) {
+            resolve( value );
+        } else {
+            reject( 'Odd number found!' );
+        }
+    }, 1000 );
+} );
+
+// listen to promise resolution
+findEven.then( ( value ) => {
+    // (parameter) value: number
+    console.log( 'Resolved:', value + 1 );
+} ).catch( ( error ) => {
+    // (parameter) error: any
+    console.log( 'Rejected:', error );
+} ).finally( () => {
+    console.log( 'Completed!' );
+});
+
+//Parallel control flow
+// an async function to simulate loading an item from some server
+function loadItem(id: number): Promise<{ id: number }> {
+    return new Promise((resolve) => {
+        console.log('loading item', id);
+        setTimeout(() => { // simulate a server delay
+            resolve({ id: id });
+        }, 1000);
+    });
+}
+
+// Chained / Sequential
+let item1, item2;
+loadItem(1)
+    .then((res) => {
+        item1 = res;
+        return loadItem(2);
+    })
+    .then((res) => {
+        item2 = res;
+        console.log('done');
+    }); // overall time will be around 2s
+//https://medium.com/jspoint/typescript-promises-and-async-await-b842b55ee3fd
+// Concurrent / Parallel: when u need to call a callback when all promises have executed 
+Promise.all([loadItem(1), loadItem(2)])
+    .then((res) => {
+        [item1, item2] = res;
+        console.log('all done');
+    }); // overall time will be around 1s
+
+    
+//===CONCEPTS: async/await: 
+//1. a mechanism of making task-based asynchronous method
+//2. Using async await lets us use Promises in a reliable and safe way.
+
+//async functions
+async function gilad() {
+  return 'Gilad';
+}
+// or
+const giladLamda = async () => {
+  return 'Gilad Lambda';
+}
+
+//callback hell style
+const start = callback => {
+  setTimeout(() => {
+    callback('Hello');
+    setTimeout(() => {
+      callback('And Welcome');
+      setTimeout(() => {
+        callback('To Async Await Using TypeScript');
+      }, 5000);
+    }, 6000);
+  }, 7000);
+};
+start(text => console.log(text));
+// Promise based delay function
+const logIt = async (text:string) => { 
+    console.log(text);
+};
+const wait = (ms) => new Promise(res => setTimeout(res, ms));
+const startAsync = async callback => {
+  await wait(1000);
+  callback('Hello');
+  await wait(1000);
+  callback('And Welcome');
+  await wait(1000);
+  callback('To Async Await Using TypeScript');
+};
+startAsync(logIt);
