@@ -1,5 +1,11 @@
 
 //==== type system =====//
+//all are valid statements to declare a variable in TypeScript:
+var myVar1 = 123;
+var myVar2:number = 123;
+let myVar3: number = 123;
+//let ba:string=47;//in latest TS, it's an error
+//console.log( " Value of a= " +ba);
 //difference b/w let and var
 var fV = 4;//function scoped
 if (true) {
