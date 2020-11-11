@@ -1,12 +1,15 @@
-const sum = require('./js-tests');//export functions or modules to test
+//import functions or modules to test
+const sum = require('./js-tests');
+const { Functions } = require('./ts-tests')
+
 //Setting up tests:
 beforeAll(() => {
-  console.log('Strting tests...');
+  console.log('Starting tests...');
 })
 afterAll(() => {
   console.log('Ended all tests...');
 })
-//describing a s=test suit
+//describing a test suit
 describe('BASIC Jest testing', () => {
  
 beforeEach(() => {
@@ -30,8 +33,6 @@ test('age calculator by birth year', () => {
     expect(calcAge(1975)).toBe(45);
 });
  
-const { Functions } = require('./ts-tests')
-
 test('test TS functions exported', () => {
   expect(Functions.add(1, 2)).toBe(3); 
 });
