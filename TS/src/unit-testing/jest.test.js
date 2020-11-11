@@ -1,6 +1,7 @@
 //import functions or modules to test
 const sum = require('./js-tests');
-const { Functions } = require('./ts-tests')
+const { Functions, Sum } = require('./ts-tests')
+//import SumMaker as Sum  from "./ts-tests";//can only be used in a ts file
 
 //Setting up tests:
 beforeAll(() => {
@@ -10,8 +11,8 @@ afterAll(() => {
   console.log('Ended all tests...');
 })
 //describing a test suit
-describe('BASIC Jest testing', () => {
- 
+describe('BASIC testing', () => {
+  return;
 beforeEach(() => {
   console.log('Test Started');
 })
@@ -52,6 +53,9 @@ test('compare JSON/static objects with toBe', () => {
 test('compare a string with a regex', () => {
   expect('Ahmed').toMatch(/Z/);
 });
+  test('test a class function', () => { 
+      expect(Sum.Of(1, 2)).toBe(1);
+  });
 
 //w/o async and await
 // test('test promise by an http api call', () => {
@@ -74,4 +78,46 @@ test('test promise by an http api call', async() => {
    
 });
   
+});
+
+describe('MOCKS', () => { 
+  const axios = require('./axiosConfig');
+  const getPhotosByAlbumId = require('./api');
+  jest.mock('./axiosConfig', () => {
+    return {
+        baseURL: 'https://jsonplaceholder.typicode.com/albums',
+        request: jest.fn().mockResolvedValue({
+            data:
+                [
+                    {
+                        "albumId": 2,
+                        "id": 51,
+                        "title": "non sunt voluptatem placeat consequuntur rem incidunt",
+                        "url": "https://via.placeholder.com/600/8e973b",
+                        "thumbnailUrl": "https://via.placeholder.com/150/8e973b"
+                    },
+                    {
+                        "albumId": 2,
+                        "id": 52,
+                        "title": "eveniet pariatur quia nobis reiciendis laboriosam ea",
+                        "url": "https://via.placeholder.com/600/121fa4",
+                        "thumbnailUrl": "https://via.placeholder.com/150/121fa4"
+                    },
+                    {
+                        "albumId": 2,
+                        "id": 53,
+                        "title": "soluta et harum aliquid officiis ab omnis consequatur",
+                        "url": "https://via.placeholder.com/600/6efc5f",
+                        "thumbnailUrl": "https://via.placeholder.com/150/6efc5f"
+                    }
+                ]
+        }),
+    }
+});
+  test('mocking an api call against mock api', async () => { 
+   
+    var data = await getPhotosByAlbumId(2);
+    expect(data.length).toBe(3);
+
+  });
 });
