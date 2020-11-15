@@ -52,6 +52,21 @@ const fooBar = {...fo, ...ba};
 // fooBar is now {a: 1, b: 2, c: 1, d: 2}
 
 
+//===CONCEPTS: Optional Chaning operator
+/*Summary
+1. When you want to ACCESS or EXECUTE a nested property/function, only if it exists (is not nullish).
+
+*/
+let otherVal = { prop: { name:'some property'}};
+let val = otherVal !== null &&
+    otherVal !== undefined &&
+    otherVal.prop !== null &&
+    otherVal.prop !== undefined &&
+    otherVal.prop.name;
+    
+//the chaining operator makes turns above into the following:
+ val = otherVal?.prop?.name;
+
 
 //===CONCEPTS: REST parameters
 /*Summary
