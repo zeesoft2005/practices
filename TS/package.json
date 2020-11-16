@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "test": "jest",
+    "testWatch": "jest --watchAll"
+  },
+  "name": "ts",
+  "version": "1.0.0",
+  "description": "TS practices",
+  "main": "jest.test.js",
+  "dependencies": {
+    "@types/jest": "^26.0.15",
+    "axios": "^0.21.0",
+    "fs": "0.0.1-security",
+    "jest": "^26.6.3",
+    "path": "^0.12.7",
+    "ts-jest": "^26.4.4"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.7"
+  },
+  "keywords": [
+    "TS"
+  ],
+  "author": "Zeeshan Ahmed",
+  "license": "ISC"
+}
