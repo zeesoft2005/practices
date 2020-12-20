@@ -1,0 +1,43 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "questions":[
+    {
+      "QuestionID": 1,
+      "QuestionTypeID": 1,
+      "QuestionText":"Choose the correct answer: MCQ",
+      "Options": [
+          { "ID": 1, "Title":"Q1.Options 1", "OptionsTypeID": 1},
+          { "ID": 2, "Title":"Q1.Options 2", "OptionsTypeID": 1}
+        ],
+      "IsQuestionAttempted" : false,
+      "AnswerGiven": false
+    },
+    {
+      "QuestionID": 2,
+      "QuestionText": "Select all valid options: ATA",
+      "QuestionTypeID": 2,
+      "Options": [
+          { "ID": 1, "Title":"Q2.Options 1", "OptionsTypeID": 2},
+          { "ID": 2, "Title":"Q2.Options 2", "OptionsTypeID": 2}
+        ],
+      "IsQuestionAttempted" : false,
+      "AnswerGiven": false
+    }
+  ]
+}

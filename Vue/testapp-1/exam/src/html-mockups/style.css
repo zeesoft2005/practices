@@ -1,0 +1,12 @@
+.border-none
+{
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+}
+.page-item .page-link{
+    color: #393f44;
+}
+.list-group-item{
+    cursor: pointer;
+}
