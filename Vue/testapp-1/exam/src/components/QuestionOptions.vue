@@ -1,8 +1,12 @@
 <template>
   <div class="questionOptions">
 
-      <input class="form-check-input me-3"  value=""  v-bind:type="type" v-bind:id ="id" v-bind:name="OptionsTypeID" v-on:click = "onSelection">
-                            {{Title}}
+      <input  v-if="IsInputType" class="form-check-input ml-auto"  value=""  v-bind:type="type" v-bind:id ="id" v-bind:name="OptionsTypeID" v-on:click = "onSelection">
+      <span  v-if="IsInputType" class="pl-4">{{Title}}</span>
+      <!--textarea id="editor1" v-if="!IsInputType" ></!--textarea-->
+      <ckeditor v-if="!IsInputType"  :config="editorConfig"></ckeditor>
+
+
   </div>
 </template>
 
@@ -13,23 +17,19 @@ export default {
   data(){
     return {
       id : this.ID + '_' + this.OptionsTypeID,
-      type: this.OptionsTypeID == 1? 'radio':'checkbox'
+      type: this.OptionsTypeID == 1? 'radio':'checkbox',
+      IsInputType : this.OptionsTypeID < 3,
+      editorConfig:{//https://ckeditor.com/docs/ckeditor4/latest/guide/dev_vue.html#basic-usage
+        // toolbar: [ [ 'Bold' ] ]
+
+      }
     }
-  },
-   created:function(){
-        console.log('QO::LIFECYCLE:: created:'+this.OptionsTypeID)
-       
-      },
-        updated:function(){
-        console.log('QO:: updated:'+this.OptionsTypeID)
+    },
+    updated:function(){
+      console.log('QO:: updated:'+this.OptionsTypeID)
       this.bind();
 
-      },
-   mounted:function(){
-        console.log('QO::LIFECYCLE:: mounted:'+this.OptionsTypeID);
-      
-
-      },
+    },  
   methods:{
     bind(){
         this.id = this.ID + '_' + this.OptionsTypeID;
@@ -42,8 +42,3 @@ export default {
     }  
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

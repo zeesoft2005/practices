@@ -20,7 +20,7 @@
     {
       "QuestionID": 1,
       "QuestionTypeID": 1,
-      "QuestionText":"Choose the correct answer: MCQ",
+      "QuestionText":"Which are the parts of a CPU? (MCQ)",
       "Options": [
           { "ID": 1, "Title":"Q1.Options 1", "OptionsTypeID": 1},
           { "ID": 2, "Title":"Q1.Options 2", "OptionsTypeID": 1}
@@ -38,6 +38,14 @@
         ],
       "IsQuestionAttempted" : false,
       "AnswerGiven": false
+    },
+     {
+          "QuestionID": 3,
+          "QuestionText": "This Question requires free-input answer",
+          "QuestionTypeID": 3,
+          "Options": [    { "ID": 3, "Title":"Q3. Please type...", "OptionsTypeID": 3}],            
+          "IsQuestionAttempted" : false,
+          "AnswerGiven": false
     }
   ]
 }

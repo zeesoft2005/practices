@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>{{ QuestionTypeID == 2 ? 'Answer (Please select all that apply):':'Answer (Please select your correct option):'}}</h5>
+                            <h5>{{Instruction}}</h5>
                         </div>
                     </div>
                 </div>
@@ -36,13 +36,20 @@ export default {
   props: ['ID', 'QuestionText', 'Options', 'QuestionTypeID'], 
   data(){
     return {
-      
+      Instruction: ''
     }
+  },
+  updated(){
+    this.setInstruction();
   },
   components:{
     QuestionOptions
   },
    methods:{
+     setInstruction(){
+       this.Instruction = this.QuestionTypeID == 2 ? 'Answer (Please select all that apply):':
+       (this.QuestionTypeID == 3? 'Answer (Please enter your answer:)': 'Answer (Please select your correct option):');
+     },
     onQuestionAttempt:function(selection){
         console.log('USER_RESPONSE::OptionID: ' + selection + ', QuestionID: '+ this.ID);
         this.$emit('USER_RESPONSE', {

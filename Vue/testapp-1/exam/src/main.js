@@ -4,7 +4,7 @@ import Vue from 'vue'
 import './plugins/bootstrap-vue'
 import App from './App.vue'
 import Router from 'vue-router'
-
+import Vuex from 'vuex'
 
 import Home from './components/Home.vue'
 import ExamSession from './components/ExamSession.vue'
@@ -21,6 +21,15 @@ import '@fortawesome/fontawesome-free/js/all.js'
 library.add(faUserSecret)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+import store from './store/store'
+
+import CKEditor from 'ckeditor4-vue';
+
+Vue.use( CKEditor );
+
+Vue.use(store)
+
+Vue.use(Vuex)
 
 Vue.use(Router);
 const routes = [{ path: '/', component: Home }, { path: '/start', component: ExamSession },
@@ -60,7 +69,7 @@ Vue.mixin({
     loadQ(QuestionID, onsuccess, onfailure){
         if(!onsuccess)
           throw 'must specify a handler on success';
-        var api = QuestionID? 'http://localhost:3000/questions?QuestionID='+ QuestionID : 'http://localhost:3000/questions?_page=1&_limit=1';        
+        var api = QuestionID? 'http://localhost:3000/questions?QuestionID='+ QuestionID : 'http://localhost:3000/questions';        
         Vue.axios.get(api).then((response) => {
           onsuccess(response);         
         }).catch((reason)=>{
@@ -72,5 +81,6 @@ Vue.mixin({
 })
 new Vue({
   router: router,
-  render: h => h(App),
+  store,
+  render: h => h(App)
 }).$mount('#app')
