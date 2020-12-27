@@ -8,7 +8,9 @@
 
 export default {
   name: 'CountDown',
-  props: ['Minutes'], 
+  props: {
+    Minutes : Number
+  }, 
   data(){
     return {
       Elm: null

@@ -2,10 +2,10 @@
    <div class="container mt-1">   
         <div class="row">
             <div class="col">
-                <h5><strong class="text-danger">CS101-8 </strong>Introduction to Computer Engineering</h5>
+                <h5><strong class="text-danger">{{session.CourseID}} </strong>{{session.CourseName}}</h5>
             </div>
             <div class="col text-right ">
-                <h5 class=""><strong class="text-danger ">11686 </strong>Zeeshan Ahmed</h5>
+                <h5 class=""><strong class="text-danger ">{{session.CandidateID}} </strong>{{session.CandidateName}}</h5>
             </div>
         </div>
          <ExamSessionDetail :QuestionID = "QuestionID" :key="QuestionID" :QuestionIndex = "questionCounter"> </ExamSessionDetail>
@@ -13,7 +13,9 @@
                <div class="card-footer">
                     <div class="row">
                         <div class="col">
-                            <h3><span class="badge bg-success text-center"><i class="fa fa-clock"></i> <span id='countDownDisplay'>    <CountDown :Minutes="1"/>
+                            <h3><span class="badge bg-success text-center"><i class="fa fa-clock"></i> <span id='countDownDisplay'>   
+
+                               <CountDown v-bind:Minutes="totalTime"/>
 </span><br /><span
                                         style="font-size: x-small;" id='startTimeDisplay'>Start time: <span>{{this.getStartDateTime()}}</span></span></span></h3>
                         </div>
@@ -61,8 +63,7 @@
             </div>
           </div>
         </div>
-       </div>
-  
+       </div>  
      </div>
 </template>
 
@@ -74,55 +75,62 @@ Vue.use(VueAxios, axios)
 import ExamSessionDetail from './ExamSessionDetail.vue'
 import CountDown from './CountDown.vue'
 import {mapState} from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'ExamSession',
-  props: {
-    IsInProgress: Boolean,    
-    
-  },
+  
   created:function(){
-    console.log('LIFECYCLE:: created')
-    this.loadQ(0, this.handleResponse);
+    console.log('LIFECYCLE:: created');
+    var me = this;
+    this.loadExam({ExamID: me.ExamID}).then(function(){
+          me.CandidateName = me.$store.state.session.CandidateName;
+          me.loadQs().then(me.handleResponse);
+    });
   },
 
-  filters: {
-    twoDecimal (value) {
-      return value.toFixed(2)
-    }
-  },
   methods:{
-      getStartDateTime: function (){
-      var d = new Date(); // for now
+      ...mapActions(['loadQs','loadExam']),
+      getStartDateTime: function (datetime){
+      var d = datetime || new Date(); // for now
       return d.getHours() + ': ' + d.getMinutes() + ':' + d.getSeconds(); 
     },
-    validateNavigation(){
-        this.NoPrevItem = this.$store.state.questionCounter == 1;    
-        this.NoNextItem = this.$store.state.questionCounter == this.$store.state.questions.length;
+    enableDisableNavigationButtons(){
+        this.NoPrevItem = this.questionCounter == 1;    
+        this.NoNextItem = this.questionCounter == this.totalCount;
     },
     prevQ(){
-              this.$store.commit('decrement');
-              this.QuestionID = this.$store.state.questions[this.$store.state.questionCounter-1].QuestionID;
-              this.validateNavigation();
+        this.$store.commit('decrement');
+        this.navigate();
     },
     nextQ(){
-              this.$store.commit('increment');
-              this.validateNavigation();
-              this.QuestionID = this.$store.state.questions[this.$store.state.questionCounter-1].QuestionID;
+        this.$store.commit('increment');
+        this.navigate();
     },
-    handleResponse(response){
-        this.$store.commit({type:'populate', data: response.data});
-        this.QuestionID = response.data[0].QuestionID;
-         this.validateNavigation();
-        console.log('Session::Questions loaded:'+ JSON.stringify(response.data));
+    navigate(){
+        this.enableDisableNavigationButtons();
+        this.QuestionID = this.questions[this.questionCounter-1].QuestionID;
+        console.log(this.questionCounter-1)
+    },
+    handleResponse(){
+      if(this.statusMessage){
+        this.$toasted.show(this.statusMessage);
+      }
+      if(this.totalCount){
+        this.QuestionID = this.questions[0].QuestionID;
+         this.enableDisableNavigationButtons();
+         this.$toasted.show('Exam started')
+      }
+      console.log('Session::Questions loaded:'+ JSON.stringify(this.questions));
     },
   
   },
 
   data(){
     return {    
-      TimeElapsed : 10,
-      QuestionID: 0,
+      QuestionID : 0,
+      ExamID: this.$route.params.ExamID,
+      CandidateName: '',
       NoPrevItem : true,
       NoNextItem : true,
       //Alert: 'Please attempt the question as directed...',
@@ -131,9 +139,18 @@ export default {
       }
     }
   },  
-  computed: mapState([
-    'questionCounter','questions'
+  computed:{ 
+    
+    ...mapState([
+    'questions','session','questionCounter','totalCount'
   ]),
+  ...mapState({
+   'statusMessage':  'apiCallStatus'
+  }),
+
+  totalTime: store=> parseInt(store.session.TimeAllowed)
+
+  },
   components:{
     ExamSessionDetail, 
     CountDown

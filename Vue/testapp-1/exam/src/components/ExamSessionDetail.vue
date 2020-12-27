@@ -7,7 +7,7 @@
                         <h4>Question No: {{QuestionIndex}} of {{totalCount}}</h4>
                     </div>
                     <div class="col text-right ">
-                        <h5 class="">Marks 1 (Budgeted Time: 1 Minute)</h5>
+                        <h5 class="">Marks: {{CurrentQuestion.Score}} (Budgeted Time:  {{CurrentQuestion.TimeAllotted | minutes}} )</h5>
                     </div>
                 </div>
             </div>
@@ -32,6 +32,7 @@ Vue.use(VueAxios, axios)
 import ExamQuestions from './ExamQuestions.vue'
 import {mapState} from 'vuex'
 import {mapGetters} from 'vuex'
+ 
 
 export default {
   name: 'ExamSessionDetail',
@@ -39,6 +40,12 @@ export default {
   components:{
     ExamQuestions
   },
+   filters: {
+    minutes(value) {
+      return parseInt(value) > 1 ? value + ' Minutes' :  value + ' Minute';
+    }
+  },
+
   computed: {
     ...mapState([
     'questions','totalCount'
@@ -61,9 +68,9 @@ export default {
      if(!this.QuestionID){
         return
      }
-        console.log('QD::LIFECYCLE:: mounted:'+ this.QuestionID);
+        //console.log('QD::LIFECYCLE:: mounted:'+ this.QuestionID);
          this.CurrentQuestion = this.getQuestion(this.QuestionID);
-         console.log('CurrentQuestion:'+ JSON.stringify(this.CurrentQuestion));
+         //console.log('CurrentQuestion:'+ JSON.stringify(this.CurrentQuestion));
 
       },
   methods:{

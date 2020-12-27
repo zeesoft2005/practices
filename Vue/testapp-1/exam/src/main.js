@@ -24,15 +24,23 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 import store from './store/store'
 
 import CKEditor from 'ckeditor4-vue';
-
 Vue.use( CKEditor );
+import Toasted from 'vue-toasted';//https://github.com/shakee93/vue-toasted
+Vue.use(Toasted, {
+  action: {
+      text: 'Dismiss',
+      onClick: (e, toastObject) => {
+        toastObject.goAway(0);
+      }
+    }
+  });
 
 Vue.use(store)
 
 Vue.use(Vuex)
 
 Vue.use(Router);
-const routes = [{ path: '/', component: Home }, { path: '/start', component: ExamSession },
+const routes = [{ path: '/', component: Home }, { path: '/start/:ExamID', component: ExamSession },
 { path: '/question/:QuestionID', component: ExamSessionDetail }];
 const router = new VueRouter({
   routes
@@ -42,10 +50,13 @@ Vue.config.productionTip = false;
 Vue.filter('countdown', function ( minutes, displayElement) {
     function startTimer(duration, display) {
        var minutes, seconds;
-       var _timer =  setInterval(function () {
+      var _timer = setInterval(function () {
+       
             minutes = parseInt(duration / 60, 10);
             seconds = parseInt(duration % 60, 10);
-
+            if (isNaN(minutes)||isNaN(seconds)){
+              return;
+            }
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
           if (display) {
@@ -64,21 +75,21 @@ Vue.filter('countdown', function ( minutes, displayElement) {
   
 });
  
-Vue.mixin({
-  methods: {
-    loadQ(QuestionID, onsuccess, onfailure){
-        if(!onsuccess)
-          throw 'must specify a handler on success';
-        var api = QuestionID? 'http://localhost:3000/questions?QuestionID='+ QuestionID : 'http://localhost:3000/questions';        
-        Vue.axios.get(api).then((response) => {
-          onsuccess(response);         
-        }).catch((reason)=>{
-          if(onfailure)
-          onfailure(reason);
-        });
-    },
-  },
-})
+// Vue.mixin({
+//   methods: {
+//     loadQ(QuestionID, onsuccess, onfailure){
+//         if(!onsuccess)
+//           throw 'must specify a handler on success';
+//         var api = QuestionID? 'http://localhost:3000/questions?QuestionID='+ QuestionID : 'http://localhost:3000/questions';        
+//         Vue.axios.get(api).then((response) => {
+//           onsuccess(response);         
+//         }).catch((reason)=>{
+//           if(onfailure)
+//           onfailure(reason);
+//         });
+//     },
+//   },
+// })
 new Vue({
   router: router,
   store,

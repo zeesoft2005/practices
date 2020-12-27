@@ -1,23 +1,34 @@
 {
-  "posts": [
+    "ExamSession":[{
+      "ID": "1",
+      "TotalQuestions": 3,
+      "TotalMarks": 10,
+      "ExamTitle": "15-dec exam",
+      "TimeAllowed": 12,
+      "CandidateName": "Zeeshan",
+      "CourseID": "CS301",
+      "CourseName": "Linear Algebra",
+      "CandidateID": "12345",
+      "Instructions":"Instructions..",
+      "StartDateTime": "24-12-2020 13:00",
+      "OrgId": "c77330fa-8c60-4305-9dde-48f34d205450"
+    },{
+      "ID": "2",
+      "TotalQuestions": 1,
+      "TotalMarks": 5,
+      "ExamTitle": "26-dec exam",
+      "TimeAllowed": 5,
+      "CandidateName": "Ahmed",
+      "CourseID": "MTH201",
+      "CourseName": "Mathematics",
+      "CandidateID": "12346",
+      "Instructions":"Other Instructions..",
+      "StartDateTime": "26-12-2020 13:00",
+      "OrgId": "c77330fa-8c60-4305-9dde-48f34d205450"
+    }],
+  "Questions":[
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
-  "questions":[
-    {
+      "ExamID":1,
       "QuestionID": 1,
       "QuestionTypeID": 1,
       "QuestionText":"Which are the parts of a CPU? (MCQ)",
@@ -25,10 +36,11 @@
           { "ID": 1, "Title":"Q1.Options 1", "OptionsTypeID": 1},
           { "ID": 2, "Title":"Q1.Options 2", "OptionsTypeID": 1}
         ],
-      "IsQuestionAttempted" : false,
-      "AnswerGiven": false
+      "TimeAllotted" : 1,
+      "Score": 2
     },
     {
+      "ExamID":1,
       "QuestionID": 2,
       "QuestionText": "Select all valid options: ATA",
       "QuestionTypeID": 2,
@@ -36,16 +48,17 @@
           { "ID": 1, "Title":"Q2.Options 1", "OptionsTypeID": 2},
           { "ID": 2, "Title":"Q2.Options 2", "OptionsTypeID": 2}
         ],
-      "IsQuestionAttempted" : false,
-      "AnswerGiven": false
+      "TimeAllotted" : 2,
+      "Score": 3
     },
-     {
+    {
+          "ExamID":2,
           "QuestionID": 3,
           "QuestionText": "This Question requires free-input answer",
           "QuestionTypeID": 3,
           "Options": [    { "ID": 3, "Title":"Q3. Please type...", "OptionsTypeID": 3}],            
-          "IsQuestionAttempted" : false,
-          "AnswerGiven": false
+          "TimeAllotted" : 5,
+          "Score": 5
     }
   ]
 }
