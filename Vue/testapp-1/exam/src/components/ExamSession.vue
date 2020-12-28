@@ -93,7 +93,7 @@ export default {
       ...mapActions(['loadQs','loadExam']),
       getStartDateTime: function (datetime){
       var d = datetime || new Date(); // for now
-      return d.getHours() + ': ' + d.getMinutes() + ':' + d.getSeconds(); 
+      return d.toLocaleTimeString();// d.getHours() + ': ' + d.getMinutes() + ':' + d.getSeconds(); 
     },
     enableDisableNavigationButtons(){
         this.NoPrevItem = this.questionCounter == 1;    

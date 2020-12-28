@@ -46,7 +46,9 @@ const router = new VueRouter({
   routes
 });
 Vue.config.productionTip = false;
-
+Vue.filter('time', timestamp => {
+  return new Date(timestamp).toLocaleTimeString()
+})
 Vue.filter('countdown', function ( minutes, displayElement) {
     function startTimer(duration, display) {
        var minutes, seconds;
