@@ -10,5 +10,5 @@ Characteristics of a Good Component Design:
 8- must have a function to clean/destroy its state and elements from dom
 9- components composed of 1 or two elements can dynamically createElement's to append the final UI in target parent node
 but those made up of complex markup should have inline html with templating to parse and generate its markup with model data
-10- a composite components (i.e. which are made up of different types of child componetns) should have handling functions to fulfil their functionality
+10- composite components (i.e. which are made up of different types of child componetns) should have handling functions to fulfil their functionality
 
