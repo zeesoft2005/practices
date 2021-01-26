@@ -20,6 +20,8 @@
     </head>
     <body>
          <div id="subscriber"></div>
+        
+        <script src ="js/Core.js"/> </script>
         <script src ="js/Utils.js"/> </script>
 
         <script src ="js/DOMUtils.js"/> </script>
@@ -28,7 +30,21 @@
         <script src ="js/LabelledTextInputComposite.js"/> </script>
         <!-- <script src ="js/SimpleComposite.js"/> </script> -->
 
-        <script>
+        <script>            
+            NS.createNS('Tests.classes.Person', Core.Class.extend({
+                init:function(options){
+                    this.name = options.name;
+                    this.key = 'person_cls';
+                    this.subscribe('name', function(args){
+                        alert(args.message);
+                    });
+                },
+                getName: function(){
+                    this.publish({event:'name', data: { message:'name accessed...'}});                   
+                    return this.name;
+                }
+            }));
+
             // var composite = new UL('listOfStudents');
             // composite.addItem('Zeeshan');
             // composite.addItem('Ahmed');
