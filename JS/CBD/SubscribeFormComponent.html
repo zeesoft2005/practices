@@ -20,6 +20,7 @@
     </head>
     <body>
          <div id="subscriber"></div>
+        <script src ="js/Utils.js"/> </script>
 
         <script src ="js/DOMUtils.js"/> </script>
         <script src ="js/DynamicElementComponent.js"/> </script>
@@ -40,6 +41,17 @@
 
           //  try
            // {  
+               
+
+           var input = new LabelledTextInput({//composite of two DynamicElement's
+            label: new DynamicElement({ tagName:'LABEL', content:"Please specify your email"}),
+            input: new DynamicElement({ tagName:'INPUT', id:'emailInput'}),
+            inputErrorStyle: 'background: #fff0f4; color: #c51244;border: 1px solid #c51244;',
+            inputPlaceholder:'Valid Email Address here',
+            targetSelector: '#subscriber',//optional
+            css:'margin-top: 40px;margin-bottom: 100px;height:100px;background-color:rgb(217, 237, 247);'            
+            });
+
             var  tooltip  = new DynamicElement({
                 id:'tooltip',
                 cls:'tooltip',
@@ -58,20 +70,8 @@
                 css: 'font-size:16px;line-height:24px;width:100%;background-color:#fff;border:4px solid #51a351;color:#51a351;display:block;z-index:200;max-width:calc(100% - 10px);max-height:100%;overflow:auto;',
                 targetSelector: '#subscriber'    
             });          
-           // msg1.ShowElement();
-            //msg1.HideElement(null, true);
           
-
-           var input = new LabelledTextInput({//composite of two DynamicElement's
-            label: new DynamicElement({ tagName:'LABEL', content:"Please specify your email"}),
-            input: new DynamicElement({ tagName:'INPUT', id:'emailInput'}),
-            inputErrorStyle: 'background: #fff0f4; color: #c51244;border: 1px solid #c51244;',
-            inputPlaceholder:'Valid Email Address here',
-            targetSelector: '#subscriber',//optional
-            css:'margin-top: 40px;margin-bottom: 100px;height:100px;background-color:rgb(217, 237, 247);'            
-            });
-
-          var btnSubmit = new DynamicElement({
+            var btnSubmit = new DynamicElement({
                // id:'button'
                 tagName:'button',
                 tooltipText:'Click to proceed',
@@ -80,6 +80,7 @@
                 css: 'height:40px;width:150px;margin-left:0;display:inline;border-radius:1px 7px 7px 1px;border:none;background-color:#32d4ac;font-size:25px;color:#fff;font-family:calibri;',
                 targetSelector: '#subscriber',
             });
+            
             console.log('Component successfully rendered.');
             
         SubscribeForm.init({

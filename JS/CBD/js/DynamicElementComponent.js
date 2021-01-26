@@ -1,3 +1,4 @@
+
 /*
 This class is meant for creating custom html components with basic functionality such as:
 show/hide, setContent/setIcon and listen for click/mouseover/mouseout events
@@ -132,3 +133,23 @@ var DynamicElement = (function () {
 
     return DynamicElement; //return the constructor
 }());
+
+//HERE'S HOW WE CAN INHERIT FROM A PARENT COMPONENT AND CREATE A CHILD COMPONENT
+var ChildElement = (function (parent) {
+
+    function Child(options) {
+        parent.call(this, options); 
+        Utils.Extend(this, options);
+    }
+ 
+    Utils.Inherit(parent, Child);
+    
+    //add extended functionality
+    Child.prototype.custom = function(params) {
+        console.log('custom func:' + this.name);        
+    };
+  
+    
+    return Child;
+
+}(DynamicElement));
