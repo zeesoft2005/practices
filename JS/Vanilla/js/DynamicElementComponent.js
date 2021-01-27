@@ -6,11 +6,7 @@ show/hide, setContent/setIcon and listen for click/mouseover/mouseout events
 var DynamicElement = (function () {
     //private data: variables and methods
     var custom_id_prefix = 'c_';
-    function getRandomInt(min, max) {
-        var min = Math.ceil(min);
-        var max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-    };
+  
     var _render = function () { 
         if (this.isRendered) {
             return;
@@ -20,7 +16,7 @@ var DynamicElement = (function () {
             this.el.style = this.css;
         }
         if (this.styles) {
-            DomUtils.addStylesInPage(this.styles);
+            Core.DomUtils.addStylesInPage(this.styles);
         }
        // debugger
         _setIcon.call(this, this.icon);   
@@ -28,7 +24,7 @@ var DynamicElement = (function () {
     };
     var _init = function (options) {
             if (options) {
-                this.id = options.id || custom_id_prefix + getRandomInt(1,1000);
+                this.id = options.id || custom_id_prefix + Core.Utils.GetRandomInt(1,1000);
                 this.tooltipText = options.tooltipText;
                 this.icon = options.icon;
                 this.cls = options.cls;
@@ -40,7 +36,7 @@ var DynamicElement = (function () {
                 this.parent = document.querySelector(options.targetSelector) || document.body;
         }
         this.isRendered = false;
-        this.el = DomUtils.createNode(this.tag, this.cls, this.id, this.content, null, this.tooltipText);
+        this.el = Core.DomUtils.createNode(this.tag, this.cls, this.id, this.content, null, this.tooltipText);
 
         if (this.showOnCreation) {
             _render.call(this);
@@ -65,7 +61,7 @@ var DynamicElement = (function () {
             return;
         }
         var icon = iconUrl;        
-        var iconImg = DomUtils.createNode('img');
+        var iconImg = Core.DomUtils.createNode('img');
         iconImg.setAttribute('src', icon);
         if (this.iconPos) {
             iconImg.style.float = this.iconPos;
@@ -79,7 +75,7 @@ var DynamicElement = (function () {
        }
         this.el.innerHTML = content;        
         if (showClassName) {
-            DomUtils.addClass(this.el, showClassName);
+            Core.DomUtils.addClass(this.el, showClassName);
         } else {
             this.el.style.display = 'block';
         }
@@ -88,10 +84,10 @@ var DynamicElement = (function () {
     var _hide = function (hideClassName, fadeOut) {    
 
         if (hideClassName) {
-            DomUtils.addClass(this.el, hideClassName);
+            Core.DomUtils.addClass(this.el, hideClassName);
         }
         else if (fadeOut) {
-            DomUtils.fadeOut(this.el);
+            Core.DomUtils.fadeOut(this.el);
         }
         else {
             this.el.style.display = 'none';
@@ -139,10 +135,10 @@ var ChildElement = (function (parent) {
 
     function Child(options) {
         parent.call(this, options); 
-        Utils.Extend(this, options);
+        Core.Utils.Extend(this, options);
     }
  
-    Utils.Inherit(parent, Child);
+    Core.Utils.Inherit(parent, Child);
     
     //add extended functionality
     Child.prototype.custom = function(params) {

@@ -23,7 +23,7 @@ var SubscribeForm = {
         this.notifier.hideElement(null, true);
     },
     showNotification: function (msg) {     
-        DomUtils.removeClass(this.notifier.el, 'fadeOut');//this is to re-show a msg which was faded out before
+        Core.DomUtils.removeClass(this.notifier.el, 'fadeOut');//this is to re-show a msg which was faded out before
         this.notifier.showElement(msg);
         this.hideNotification();
     },

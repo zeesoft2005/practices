@@ -11,7 +11,7 @@ var LabelledTextInput = (function () {
     if (options.targetSelector) {//if parent info given?  create a dom node
         this.parent = document.querySelector(options.targetSelector);
     } else {//create a div and append to body
-        this.parent = DomUtils.createNode(null, "inputParent", null, null, document.body);
+        this.parent = Core.DomUtils.createNode(null, "inputParent", null, null, document.body);
     }
     this.label.el.setAttribute('for', 'emailInput');
     this.input.el.setAttribute('name', 'emailInput');

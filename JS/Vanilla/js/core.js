@@ -2,7 +2,7 @@
 A library to create C# like namespaces in Js and create register a type/class with that namespace
 */
 (function (NamespaceJS) {
-    NS.createNS = function (fqName, cls) {
+    NS.create = function (fqName, cls) {
         var nsparts = fqName.split('.');
         var parent = window;
         // we want to be able to include or exclude the root namespace
@@ -38,7 +38,7 @@ A library to create C# like namespaces in Js and create register a type/class wi
  * A Pub-Sub event-cache
  * Pre-req: the using class must have this.key property defined    
  */
- NS.createNS('Core.PubSub', {
+ NS.create('Core.PubSub', {
     pub: function () {//expects something like: 'asdf' OR {event: 'abc', data:{}} OR {origin: 'abc', state:'xyz' data:{}} 
         // Turn arguments object into a real array  
         var args = Array.prototype.slice.call(arguments, 0);
@@ -148,7 +148,7 @@ A library to create C# like namespaces in Js and create register a type/class wi
     };
 
      //register this class
-    NS.createNS('Core.Class', this.JSClass);
+    NS.create('Core.Class', this.JSClass);
     //attach pubsub
     JSClass.prototype.publish = function (e) {
         Core.PubSub.pub.call(this, e);

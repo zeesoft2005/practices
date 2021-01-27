@@ -23,15 +23,30 @@
         
         <script src ="js/Core.js"/> </script>
         <script src ="js/Utils.js"/> </script>
-
         <script src ="js/DOMUtils.js"/> </script>
+        <script src ="js/BaseView.js"/> </script>
+
         <script src ="js/DynamicElementComponent.js"/> </script>
         <script src ="js/SubscribeFormComposite.js"/> </script>
         <script src ="js/LabelledTextInputComposite.js"/> </script>
         <!-- <script src ="js/SimpleComposite.js"/> </script> -->
+  <script>   
+       // Usages
+        var view1 = new Core.BaseView({ template:'<h2>H2 Template on body,  <#=name#>!</h2>', name:'zee',        
+        afterRender: function(){
+            Core.DomUtils.fadeOut(this.getContainer());
+        }
+    });
+        var view2 = new Core.BaseView({ targetSelector: '#subscriber', template:'<h2>H2 Template in a target elem,  <#=name#></h2>!', name:'zee'});
+        var view3 = new Core.BaseView({ model:{template:'<h2>H2 model template in body,  <#=name#>!</h2>', name:'zee'},
+        beforeRender:function(){
+                    this.model.name = 'shan';
+        },
+    });
+        var view4 = new Core.BaseView({ model:{containerElemType:'span', template:'<h2>H2 model template in SPAN tag,  <#=name#>!</h2>', name:'zee'}});
+        var view5 = new Core.BaseView({ rawContent:'<h2>H2, I\'m static raw html!</h2>'});
 
-        <script>            
-            NS.createNS('Tests.classes.Person', Core.Class.extend({
+            NS.create('Tests.classes.Person', Core.Class.extend({
                 init:function(options){
                     this.name = options.name;
                     this.key = 'person_cls';
