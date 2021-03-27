@@ -43,6 +43,14 @@ NS.create('Core.DomUtils', (function () {
             }
         }
     };
+    //removes all classes and optionally sets only the specified css
+    _DomUtils.removeClass = function (element, className) {
+        
+        element.className = '';//clear previous classes
+        if (className) {
+            _DomUtils.addClass(element, className);
+        }
+    };
     _DomUtils.fadeOut = function (element, removeElement, fadeOutTimeout, fadeOutClassName) {
             var me = this;
                 setTimeout(function () { 

@@ -3,7 +3,7 @@
 This class is meant for creating custom html components with basic functionality such as:
 show/hide, setContent/setIcon and listen for click/mouseover/mouseout events
 */
-var DynamicElement = (function () {
+NS.create('Core.Components.DynamicElement',(function () {
     //private data: variables and methods
     var custom_id_prefix = 'c_';
   
@@ -128,24 +128,24 @@ var DynamicElement = (function () {
     DynamicElement.prototype = PUBLIC_METHODS;//expose methods for caller
 
     return DynamicElement; //return the constructor
-}());
+}()));
 
 //HERE'S HOW WE CAN INHERIT FROM A PARENT COMPONENT AND CREATE A CHILD COMPONENT
-var ChildElement = (function (parent) {
+// var ChildElement = (function (parent) {
 
-    function Child(options) {
-        parent.call(this, options); 
-        Core.Utils.Extend(this, options);
-    }
+//     function Child(options) {
+//         parent.call(this, options); 
+//         Core.Utils.Extend(this, options);
+//     }
  
-    Core.Utils.Inherit(parent, Child);
+//     Core.Utils.Inherit(parent, Child);
     
-    //add extended functionality
-    Child.prototype.custom = function(params) {
-        console.log('custom func:' + this.name);        
-    };
+//     //add extended functionality
+//     Child.prototype.custom = function(params) {
+//         console.log('custom func:' + this.name);        
+//     };
   
     
-    return Child;
+//     return Child;
 
-}(DynamicElement));
+// }(DynamicElement));
