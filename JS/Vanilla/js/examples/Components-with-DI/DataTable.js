@@ -81,19 +81,8 @@ NS.create('Core.Components.DataTable', (function ($, tpl) {
         Load: _loadData,
         SearchText: _filter,
         StartUpdating: _refreshTimer,
-        StopUpdating: _stopTimer
-    };
-    //constructor function used to instantiate objects
-    function DataTable(options) {
-  
-        if (options) {           
-                _init.call(this, options);            
-        } 
-        else {
-           throw 'The component cannot be created without mandatory options';
-       }
-    }
-    DataTable.prototype = PUBLIC_METHODS;//expose methods for caller
-
-    return DataTable; //return the constructor
+        StopUpdating: _stopTimer,
+        init: _init
+    };  
+    return Core.Class.extend(PUBLIC_METHODS);//expose methods for caller
 }($, Handlebars)));//inject dependencies

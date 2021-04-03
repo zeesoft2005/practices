@@ -39,7 +39,7 @@ tr:nth-child(even) {
 
 <script>
       var dataTable; 
-      var api;
+      var api, modal;
 $(document).ready(function(){
 
     //hide tablme(s) as they are just templates
@@ -81,7 +81,7 @@ $(document).ready(function(){
       }
 
     });
-    var modal = new Core.Components.ModalForm ({
+    modal = new Core.Components.ModalForm ({
       modalSelector : '#formPopup',
       iconSelector : '#modalIcon',
       titleSelector: '.modal-title',

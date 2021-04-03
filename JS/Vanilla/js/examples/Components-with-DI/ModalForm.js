@@ -65,19 +65,10 @@ NS.create('Core.Components.ModalForm', (function ($, tpl /** Handlebars */) {
     
     //public data: methods and properties
     var PUBLIC_METHODS = {
-        Open: _loadModal
-    };
-    //constructor function used to instantiate objects
-    function Modal(options) {
-  
-        if (options) {           
-                _init.call(this, options);            
-        } 
-        else {
-           throw 'The component cannot be created without mandatory options';
-       }
-    }
-    Modal.prototype = PUBLIC_METHODS;//expose methods for caller
+        Open: _loadModal,
+        init: _init
+    }; 
+    return Core.Class.extend(PUBLIC_METHODS);//expose methods for caller
 
-    return Modal; //return the constructor
+    //return Modal; //return the constructor
 }($, Handlebars)));//inject dependencies
