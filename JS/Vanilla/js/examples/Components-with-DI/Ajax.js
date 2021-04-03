@@ -1,7 +1,4 @@
-/*
-This component is developed with Module Pattern
-*/
-var Ajax = (function ($) {
+NS.create('Core.$ajax', (function ($) {
   
     var _init = function (options) {
         
@@ -82,4 +79,4 @@ var Ajax = (function ($) {
     ajax.prototype = PUBLIC_METHODS;//expose methods for caller
 
     return ajax; //return the constructor
-}($));//inject dependencies
+}($)));//inject dependencies

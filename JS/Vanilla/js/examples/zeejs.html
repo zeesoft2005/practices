@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            zeejs codename: V3
+        </title>
+   
+    </head>
+    <body>
+        <div id="view"></div>
+        <script src ="./../zee-core.js"/> </script>
+        <script src ="./../zee-utils.js"/> </script>
+        <script src ="./../zee-dom.js"/> </script>
+        
+
+  <script>   
+       // Usages
+        var view1 = new Core.BaseView({ id : 'view1', template:'<h2>H2 Template on body,  <#=name#>!</h2>', name:'zee',        
+        afterRender: function(){
+           // Core.DomUtils.fadeOut(this.getContainer());
+        },
+        emitLogs: true,
+        persistState: true//won't work locally; ref. https://stackoverflow.com/questions/6232331/setting-cookies-using-javascript-in-a-local-html-file
+    });
+        var view2 = new Core.BaseView({ targetSelector: '#view', template:'<h2>H2 Template in a target elem,  <#=name#></h2>!', name:'zee'});
+        var view3 = new Core.BaseView({ model:{template:'<h2>H2 model template in body,  <#=name#>!</h2>', name:'zee'},
+        beforeRender:function(){
+                    this.model.name = 'shan';
+        },
+    });
+        var view4 = new Core.BaseView({ model:{containerElemType:'span', template:'<h2>H2 model template in SPAN tag,  <#=name#>!</h2>', name:'zee'}});
+        var view5 = new Core.BaseView({ rawContent:'<h2>H2, I\'m static raw html!</h2>'});
+
+            NS.create('Tests.classes.Observable', Core.Class.extend({
+                init:function(options){
+                    this.name = options.name;
+                    this.key = 'watcher';
+                },
+                listen: function(e){
+                    this.subscribe(e, function(args){
+                        console.log('Observed state change: ' + e);
+                    });
+                }
+            }));
+
+        </script>
+
+    </body>
+</html>

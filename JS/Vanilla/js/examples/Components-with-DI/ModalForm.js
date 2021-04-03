@@ -1,7 +1,7 @@
 /*
 This component is developed with Module Pattern
 */
-var ModalForm = (function ($, tpl /** Handlebars */) {
+NS.create('Core.Components.ModalForm', (function ($, tpl /** Handlebars */) {
     var _render = function () { 
 
             var modalHtml =  this.modal.html();
@@ -80,4 +80,4 @@ var ModalForm = (function ($, tpl /** Handlebars */) {
     Modal.prototype = PUBLIC_METHODS;//expose methods for caller
 
     return Modal; //return the constructor
-}($, Handlebars));//inject dependencies
+}($, Handlebars)));//inject dependencies

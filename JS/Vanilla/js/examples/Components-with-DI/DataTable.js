@@ -1,7 +1,7 @@
 /*
 This component is developed with Module Pattern
 */
-var DataTable = (function ($, tpl) {
+NS.create('Core.Components.DataTable', (function ($, tpl) {
     var _render = function () { 
 
             var rowHtml =  $(this.rowTmpl).html();
@@ -96,4 +96,4 @@ var DataTable = (function ($, tpl) {
     DataTable.prototype = PUBLIC_METHODS;//expose methods for caller
 
     return DataTable; //return the constructor
-}($, Handlebars));//inject dependencies
+}($, Handlebars)));//inject dependencies

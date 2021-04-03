@@ -30,7 +30,10 @@ tr:nth-child(even) {
 <script src="assets/jquery-3.5.1.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-
+     <script src ="./../../zee-core.js"/> </script>
+        <script src ="./../../zee-utils.js"/> </script>
+        <script src ="./../../zee-dom.js"/> </script>
+        
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/bootstrap-icons.css">
 
@@ -44,7 +47,7 @@ $(document).ready(function(){
     var page = 1;
     var url = 'https://reqres.in/api/users?page='+ page;     
     
-     dataTable = new DataTable({
+     dataTable = new Core.Components.DataTable({
         targetSelector:'#dataTable',
         rowTemplateSelector: '#rowTmpl',
         loaderSelector:'#loadingTab',
@@ -53,7 +56,7 @@ $(document).ready(function(){
         reloadTimeout: 30 * 1000//10s
     });
     dataTable.Load(url);
-    var dataList = new DataTable({
+    var dataList = new Core.Components.DataTable({
         targetSelector:'#dataList',
         rowTemplateSelector: '#listRowTmpl',
         loaderSelector:'#loadingTab',
@@ -66,7 +69,7 @@ $(document).ready(function(){
     $("#txtSearch").on("keyup", function() {
         dataTable.SearchText($(this).val());
     });
-    api = new Ajax({
+    api = new Core.$ajax({
       url : 'https://reqres.in/api/users/',
       onSuccess: function(res){
         console.log('onSuccess');
@@ -78,7 +81,7 @@ $(document).ready(function(){
       }
 
     });
-    var modal = new ModalForm ({
+    var modal = new Core.Components.ModalForm ({
       modalSelector : '#formPopup',
       iconSelector : '#modalIcon',
       titleSelector: '.modal-title',
@@ -308,10 +311,10 @@ $(document).ready(function(){
 
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script src="components/ModalForm.js"></script>
+<script src="ModalForm.js"></script>
 
-<script src="components/DataTable.js"></script>
-<script src="components/Ajax.js"></script>
+<script src="DataTable.js"></script>
+<script src="Ajax.js"></script>
 
 </body>
 </html>
