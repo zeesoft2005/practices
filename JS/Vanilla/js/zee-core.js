@@ -425,7 +425,6 @@ NS.create('Core.BaseView', Core.Class.extend({
         me.id = options.id || 'view_'+ Core.Utils.GetRandomInt(1,1000);
         me.template = options.template;
         me.parseTemplate = options.parseTemplate || Core.DomUtils.parseTemplate;
-debugger
         me.rawContent = options.rawContent;
         me.context = options.context || document;
         me.afterRender = options.afterRender;

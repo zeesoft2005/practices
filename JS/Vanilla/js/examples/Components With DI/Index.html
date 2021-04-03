@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            CRUD View Component
+        </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.alert{
+  display: none;
+}
+</style>
+<script src="assets/jquery-3.5.1.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/bootstrap-icons.css">
+
+<script>
+      var dataTable; 
+      var api;
+$(document).ready(function(){
+
+    //hide tablme(s) as they are just templates
+    $('.table, #loadingTab').hide();
+    var page = 1;
+    var url = 'https://reqres.in/api/users?page='+ page;     
+    
+     dataTable = new DataTable({
+        targetSelector:'#dataTable',
+        rowTemplateSelector: '#rowTmpl',
+        loaderSelector:'#loadingTab',
+        autoSync: false,
+        url: url,
+        reloadTimeout: 30 * 1000//10s
+    });
+    dataTable.Load(url);
+    var dataList = new DataTable({
+        targetSelector:'#dataList',
+        rowTemplateSelector: '#listRowTmpl',
+        loaderSelector:'#loadingTab',
+        autoSync: false,
+        url: url,
+        reloadTimeout: 30 * 1000//10s
+    });
+    dataList.Load(url);
+    
+    $("#txtSearch").on("keyup", function() {
+        dataTable.SearchText($(this).val());
+    });
+    api = new Ajax({
+      url : 'https://reqres.in/api/users/',
+      onSuccess: function(res){
+        console.log('onSuccess');
+        console.log(JSON.stringify(res));
+      },
+      onFailure: function(res){
+        console.log('onFailure');
+        console.log(JSON.stringify(res));
+      }
+
+    });
+    var modal = new ModalForm ({
+      modalSelector : '#formPopup',
+      iconSelector : '#modalIcon',
+      titleSelector: '.modal-title',
+      formSelector: '#formUser',
+      OnSubmit: function(model){        
+        api.AddOrUpdate(model);
+      }
+    });
+    
+    
+    $(document).on("click","#btnNew", function() {
+      modal.Open( 
+       { 
+         model: { first_name: '', last_name: '', email: '', avatar: ''},
+         title: 'Create', 
+         iconCss:'fas fa-file'
+      });
+    });
+    
+    $(document).on("click",".editLinks", function() {
+          var item = $(this);
+          var id = item.attr('id');
+           api.Get({
+          url: 'https://reqres.in/api/users/'+ id,
+          onSuccess: function (response) 
+          { 
+            sessionStorage.setItem(id, JSON.stringify(response.data));
+            modal.Open({model: response.data, title: 'Edit', iconCss:'fas fa-edit'});
+          },
+          onFailure: function(){
+            if(sessionStorage.getItem(id)){
+            //loadItem(JSON.parse(sessionStorage.getItem(id)), item.text());
+            } else {
+              alert('Problem loading data; please try again later...')
+            }
+          }
+          
+          });
+    });    
+
+    $(".page-link").on("click", function() {        
+        //clear classes if any
+        $(".page-item").removeClass('disabled active');
+
+        var pageLink = $(this);
+        var pageLinkText = $(this).text();
+        var linkId = pageLink.data('id');
+            if( linkId == 'P'){
+                --page;
+            } else if(linkId == 'N'){
+                ++page;
+            } else {
+                page = parseInt(pageLinkText);
+            }  
+        //disable 'Previous' for -ive page
+        if(page <= 0){
+            pageLink.parent().addClass('disabled');
+            return;
+        }
+        pageLink.parent().addClass('active');
+        url = 'https://reqres.in/api/users?page='+ page;
+        dataTable.Load(url);  
+        dataList.Load(url);  
+    });
+
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div class="container">
+
+<!-- Search and Create form-->
+
+<div class="row align-items-center">
+  <div class="col input-group">  
+        <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
+        <input id="txtSearch" aria-describedby="txtSearch" aria-label="Search" type="text" placeholder="Type here..."  class="form-control">
+        <button type="button" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+        </button>
+  
+  </div>
+  <div class="col">
+    <button id="btnNew" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formPopup">
+            <i class="fas fa-plus"></i>
+        Create New...
+    </button>
+</div>
+ <div class="col">
+<ul class="pagination pagination-lg justify-content-end" style="margin:20px 0">
+  <li class="page-item">
+       <a data-id='P' class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+  </li>
+  <li class="page-item"><a class="page-link" href="#">1</a></li>
+  <li class="page-item"><a class="page-link" href="#">2</a></li>
+  <li class="page-item">
+       <a class="page-link" href="#" aria-label="Next" data-id='N' >
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+  </li>
+</ul>
+ </div>
+</div>
+
+<div id='loadingTab' style="position:absolute;top:36%;left: 50%;display: none !important;">
+        <div class="spinner-border m-5" role="status"></div>
+</div>
+
+<!--START:: Data Table-->
+<div class="table-responsive">
+    
+  <table class="table table-striped  table-hover">
+
+  <thead  class="table-dark">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Avatar</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody id="dataTable">
+  
+  </tbody>
+</table>
+</div>
+
+<div class="table-responsive">
+
+  <table class="table table-striped  table-hover">
+
+  <thead  class="table-dark">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>    
+  </tr>
+  </thead>
+  <tbody id="dataList">
+  
+  </tbody>
+</table>
+</div>
+
+<!--END:: Data Table-->
+
+<!-- Modal Form-->
+
+<div class="modal fade" id="formPopup" tabindex="-1" aria-labelledby="Save" aria-hidden="true"  role="dialog">
+  <div class="modal-dialog modal-lg">
+    <form id="formUser"  action="">
+    <div class="modal-content">
+      <div class="modal-header">
+       <i id = 'modalIcon' class='far fa-file'></i>&nbsp; <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+     
+         <div id='entryForm'>
+          <div  class="form-group">
+        <input type='hidden'  data-field='id'  id='txtId' value="{{id}}">
+        <label for='txtFName'  data-field='first_name'  class="form-control" 
+        class="col-form-label">First Name:</label> 
+        <input type='text' id='txtFName' required autocomplete="name" name="name"
+        oninvalid="this.setCustomValidity('First Name is Mandatory')"
+  oninput="this.setCustomValidity('')"
+      value="{{first_name}}">
+          </div>
+           <div class="form-group">
+        <label for='txtLName'  class="col-form-label">Last Name:</label> <input type='text' id='txtLName'  required
+        value="{{last_name}}"
+          oninvalid="this.setCustomValidity('Last Name is Mandatory')"
+  oninput="this.setCustomValidity('')"
+        data-field='last_name'  class="form-control" >
+        </div>
+          <div class="form-group">
+        <label for='txtEmail'  class="col-form-label">Email:</label> <input type='email' required id='txtEmail'  
+        value="{{email}}" 
+          oninvalid="this.setCustomValidity('Email is Mandatory')"
+  oninput="this.setCustomValidity('')"
+        data-field='email' class="form-control" >
+        </div>
+          <div class="form-group">
+        <label for='txtAvatar'  class="col-form-label">Avatar:</label> <img id='imgAvatar' src="{{avatar}}"/>
+        <input placeholder="Choose file"  data-field='avatar'  type='file' id='txtAvatar'  class="form-control" >
+          </div>
+      
+      
+      
+     
+      </div>
+      <div class="alert alert-success alert-dismissible fade show" role="alert"> Changes successfully saved.</div>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert"> Something went wrong. Tray again later.</div>
+
+      </div>
+      <div class="modal-footer">
+          <button id='btnReset'  class="btn btn-secondary">Reset</button> 
+         <input type="submit" id='btnSave'  class="btn btn-primary" value='Save Changes'>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+</div>
+
+
+<script id='rowTmpl' type="text/x-handlebars-template">
+    <tr><td>{{first_name}}</td><td>{{last_name}}</td><td>{{email}}</td><td><img src="{{avatar}}"></td><td><a href="#" id="1" role="button" class="editLinks btn btn-success" 
+      ><i class="fas fa-edit"></i>&nbsp;Edit</a><span>&nbsp;</span><a href="#" id="1" role="button" class="delLinks btn btn-danger"><i class="fas fa-remove-format"></i>&nbsp;Delete</a></td></tr>
+</script>
+
+<script id='listRowTmpl' type="text/x-handlebars-template">
+    <tr><td>{{first_name}}</td><td>{{last_name}}</td><td>{{email}}</td></tr>
+</script>
+
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="components/ModalForm.js"></script>
+
+<script src="components/DataTable.js"></script>
+<script src="components/Ajax.js"></script>
+
+</body>
+</html>
