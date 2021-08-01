@@ -1,0 +1,9 @@
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\bin\Debug\netstandard2.1\CSharp8Features.deps.json
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\bin\Debug\netstandard2.1\CSharp8Features.dll
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\bin\Debug\netstandard2.1\CSharp8Features.pdb
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\obj\Debug\netstandard2.1\CSharp8Features.csproj.AssemblyReference.cache
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\obj\Debug\netstandard2.1\CSharp8Features.AssemblyInfoInputs.cache
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\obj\Debug\netstandard2.1\CSharp8Features.AssemblyInfo.cs
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\obj\Debug\netstandard2.1\CSharp8Features.csproj.CoreCompileInputs.cache
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\obj\Debug\netstandard2.1\CSharp8Features.dll
+C:\code\my_repos\3rd-party\CSharp-features\src\CSharp8Features\obj\Debug\netstandard2.1\CSharp8Features.pdb

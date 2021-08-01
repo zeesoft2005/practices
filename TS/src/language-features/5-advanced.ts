@@ -175,7 +175,7 @@ console.log(say`Welcome, ${firstName} ${lastName}. Learn ${topic} here`);
 //1. The promise is an executable task which runs .then (if resolved) or .catch (if rejected).
 //2. Promises can be run sequentially and inparallel 
 // References: 
-import {Promise} from 'es6-promise' //https://stackoverflow.com/questions/43119163/typescript-error-ts2693-promise-only-refers-to-a-type-but-is-being-used-as
+import { Promise } from 'es6-promise'
 
 const promise = new Promise((resolve, reject) => {
     reject(new Error("Something awful happened"));
@@ -186,6 +186,7 @@ promise.then((res) => {
 promise.catch((err) => {
     console.log('I get called:', err.message); // I get called: 'Something awful happened'
 });
+
 
 function asyncAction() {
   var promise = new Promise((resolve, reject) => {
@@ -206,6 +207,7 @@ asyncAction().then(function(success) {
    // error handler is called
    console.log('catch: '+ error); 
 });
+
 //The chain-ability of promises is the heart of the benefit that promises provide. 
 //then chaining, best practice is to pass error handler at the end; i.e. last then
 //You can aggregate the error handling of any preceding portion of the chain with a single catch:
@@ -241,6 +243,7 @@ Promise.reject("errorMessage")
         (error) => console.error('error:'+error)
 );
   
+  
 //static methods: Promise.resolve and Promise.reject:
 Promise.resolve(123)
     .then((res) => {
@@ -271,6 +274,7 @@ Promise.reject(new Error('something bad happened'))
         console.log(res); // 123
     });
 
+
 // A Program to generate Even/Odd number based on a generic Promise
 const getRandomInt = (): string => {
     return ( Math.random() * 10 ).toFixed( 0 );
@@ -289,7 +293,8 @@ const findEven = new Promise<number>( ( resolve, reject ) => {
             reject( 'Odd number found!' );
         }
     }, 1000 );
-} );
+});
+
 
 // listen to promise resolution
 findEven.then( ( value ) => {
@@ -332,14 +337,13 @@ Promise.all([loadItem(1), loadItem(2)])
         console.log('all done');
     }); // overall time will be around 1s
 
-    
-//===CONCEPTS: async/await: 
+    //===CONCEPTS: async/await: 
 //1. a mechanism of making task-based asynchronous method
 //2. Using async await lets us use Promises in a reliable and safe way.
 //3. async/await allows you to write asynchronous code based on Promises, in a manner that allows you to reuse your synchronous code writing skills.
-//https://blog.bitsrc.io/keep-your-promises-in-typescript-using-async-await-7bdc57041308
 
 //async functions: An async function always returns a Promise
+/*
 async function gilad() {
   return 'Gilad';
 }
@@ -375,3 +379,4 @@ const startAsync = async cb => {
   cb('To Async Await Using TypeScript');
 };
 startAsync(logIt);
+*/
