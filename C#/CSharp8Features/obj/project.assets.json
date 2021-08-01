@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\code\\my_repos\\3rd-party\\CSharp-features\\src\\CSharp8Features\\CSharp8Features.csproj",
+      "projectUniqueName": "C:\\code\\my_repos\\practices\\C#\\CSharp8Features\\CSharp8Features.csproj",
       "projectName": "CSharp8Features",
-      "projectPath": "C:\\code\\my_repos\\3rd-party\\CSharp-features\\src\\CSharp8Features\\CSharp8Features.csproj",
+      "projectPath": "C:\\code\\my_repos\\practices\\C#\\CSharp8Features\\CSharp8Features.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\code\\my_repos\\3rd-party\\CSharp-features\\src\\CSharp8Features\\obj\\",
+      "outputPath": "C:\\code\\my_repos\\practices\\C#\\CSharp8Features\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

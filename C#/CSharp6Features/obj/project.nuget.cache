@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VKVy4joJeQ2Adr9i8IvkvLT75fkKMjWRzGbsMOUlTulhKDA7G9RjVJofETgj6uyWHKpshPAg+zCw3eQPPByz3A==",
+  "dgSpecHash": "Ira9zQoQw9+AzcI2FuHpGox5sH+AP5xRBPqQGTSIOzfrdiGwnVMzHmS8l859jjvpvb6SMTe7zb8sz39cmjqUNQ==",
   "success": true,
-  "projectFilePath": "C:\\code\\my_repos\\3rd-party\\CSharp-features\\src\\CSharp6Features\\CSharp6Features.csproj",
+  "projectFilePath": "C:\\code\\my_repos\\practices\\C#\\CSharp6Features\\CSharp6Features.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

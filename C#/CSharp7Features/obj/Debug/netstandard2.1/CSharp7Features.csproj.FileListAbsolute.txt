@@ -6,3 +6,12 @@ C:\code\my_repos\3rd-party\CSharp-features\src\CSharp7Features\obj\Debug\netstan
 C:\code\my_repos\3rd-party\CSharp-features\src\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.csproj.CoreCompileInputs.cache
 C:\code\my_repos\3rd-party\CSharp-features\src\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.dll
 C:\code\my_repos\3rd-party\CSharp-features\src\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.pdb
+C:\code\my_repos\practices\C#\CSharp7Features\bin\Debug\netstandard2.1\CSharp7Features.deps.json
+C:\code\my_repos\practices\C#\CSharp7Features\bin\Debug\netstandard2.1\CSharp7Features.dll
+C:\code\my_repos\practices\C#\CSharp7Features\bin\Debug\netstandard2.1\CSharp7Features.pdb
+C:\code\my_repos\practices\C#\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.csproj.AssemblyReference.cache
+C:\code\my_repos\practices\C#\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.AssemblyInfoInputs.cache
+C:\code\my_repos\practices\C#\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.AssemblyInfo.cs
+C:\code\my_repos\practices\C#\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.csproj.CoreCompileInputs.cache
+C:\code\my_repos\practices\C#\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.dll
+C:\code\my_repos\practices\C#\CSharp7Features\obj\Debug\netstandard2.1\CSharp7Features.pdb

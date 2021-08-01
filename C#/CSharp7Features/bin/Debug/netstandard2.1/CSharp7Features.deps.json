@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "CSharp7Features/1.0.0.0": {
+      "CSharp7Features/1.0.0": {
         "runtime": {
           "CSharp7Features.dll": {}
         }
@@ -15,7 +15,7 @@
     }
   },
   "libraries": {
-    "CSharp7Features/1.0.0.0": {
+    "CSharp7Features/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
