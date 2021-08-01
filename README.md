@@ -1,4 +1,6 @@
 # About repo
+## C#
+** Walk thru C# new features and cool boiler-plats...**
 
 ## Fake-API
 **a mock api running on a json-server instance...**
