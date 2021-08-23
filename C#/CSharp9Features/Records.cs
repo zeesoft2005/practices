@@ -1,6 +1,7 @@
 ﻿namespace Records
 {
     // Example from tweet https://twitter.com/okyrylchuk/status/1418310978358423552
+    //For More examples: https://github.com/borakasmer/CSharp9.0
     class Records
     {
         record Person
@@ -9,7 +10,7 @@
             public string FirstName { get; init; } // immutable
             public string LastName { get; init; } // immutable
         }
-
+        public record K(int i,string s);
         static void Main()
         {
             var person = new Person
@@ -17,7 +18,7 @@
                 FirstName = "Oleg",
                 LastName = "Kyrylchuk"
             };
-
+            K k = new(1, "");
             // Use with-expression to create new record from existing
             // specifying the changes in the values of properties
             var bondPerson = person with { LastName = "Bond" };
